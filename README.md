@@ -1,2 +1,2 @@
-# introdu-o-a-computa-o-gr-fica
+# introducao a computacao grafica
 atividades da diciplina introducao a computacao grafica 
