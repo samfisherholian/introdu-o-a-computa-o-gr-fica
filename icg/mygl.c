@@ -13,7 +13,7 @@ void MyGlDraw(void) {
     PutPixel();
     DrawLine();
 }
-
+// Amanhã a gente continua.
 void PutPixel(){
     
     // Escreve um pixel vermelho na posicao (0,0) da tela:
