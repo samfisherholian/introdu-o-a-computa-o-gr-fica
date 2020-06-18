@@ -1,53 +1,68 @@
+/**
+ * Autores: Tiago Silva da Costa.
+ *          Marcus vinicius.
+ * 
+ * 
+ * **/
 #include "mygl.h"
+
+// Um pixel é composto por 4 bytes
+struct RGBA
+{
+    int red;
+    int green;
+    int blue;
+    int alpha
+    
+};
+
+
+struct RGBA rgba = {255, 0,0, 255};
+
+struct Pixel
+{
+    int x;
+    int y;
+     
+};
+// -=--=-=pontos setados. acende um pixels no meio da tela =-=-=-/
+struct Pixel pixel = {250,250};
+
 
 //
 // >>> Defina aqui as funções que você implementar <<< 
 //
-void PutPixel();
 // Definição da função que chamará as funções implementadas pelo aluno
 void MyGlDraw(void) {
 
-    //
-    // >>> Chame aqui as funções que você implementou <<<
-    //
-    PutPixel();
-    DrawLine();
+putPixel(pixel, rgba);
+
+
+ }
+
+int pos(int x, int y){
+    int l = ((y*4)*IMAGE_WIDTH); //l é linha, 4 bytes por pixel
+    int c = (x*4);               //c é coluna, 4 bytes por pixel
+    int position = l + c;
+    return position;          
+  }
+  void putPixel(struct Pixel pixel, struct RGBA rgba){
+
+//teste para que não sejam pintados pixels indevidos na tela, limitando o desenho a apenas a area //disponível
+
+
+
+ if((pixel.x>=0 && pixel.x<IMAGE_HEIGHT) && (pixel.y>=0 && pixel.y<IMAGE_WIDTH)){
+
+
+    fb_ptr[pos(pixel.x, pixel.y)+0] = rgba.red;
+
+    fb_ptr[pos(pixel.x, pixel.y)+1] = rgba.green;
+
+    fb_ptr[pos(pixel.x, pixel.y)+2] = rgba.blue;
+
+    fb_ptr[pos(pixel.x, pixel.y)+3] = rgba.alpha;
+
+  } 
+
 }
-// Amanhã a gente continua.
-void PutPixel(){
-    
-    // Escreve um pixel vermelho na posicao (0,0) da tela:
- // Escreve um pixel vermelho na posicao (0,0) da tela:
- for(int i = 5120;i<7168;++i){
- fb_ptr[16*i+128*i] = 222; // componente R
- fb_ptr[16*i+128*i] = 152; // componente G
- fb_ptr[16*i+128*i] = 031; // componente B
- fb_ptr[16*i+128*i] = 255; // componente A
-    }
-}
-
-void DrawLine(){
-
-    for(int i = 0; i <= 262144; i++){
-            if(i <= 200000 && i >= 190000){
-                fb_ptr[i*4+0] = 227; // componente R
-                fb_ptr[i*4+1] = 224; // componente G
-                fb_ptr[i*4+2] = 27; // componente B
-                fb_ptr[i*4+3] = 255;
-            }
-        }
-}
-
-
-    /*
-    for(int i = 0; i <= 262144; i++){
-        if(i >= 200000){
-            fb_ptr[i*4+0*] = 227; // componente R
-            fb_ptr[i*4+1] = 224; // componente G
-            fb_ptr[i*4+2] = 27; // componente B
-            fb_ptr[i*4+3] = 255;
-        }
-    }
-    */   
-
-  
