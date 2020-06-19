@@ -17,7 +17,7 @@ struct RGBA
 };
 
 
-struct RGBA rgba = {255, 0,0, 255};
+struct RGBA rgba;// = {255, 0,0, 255};
 
 struct Pixel
 {
@@ -26,7 +26,7 @@ struct Pixel
      
 };
 // -=--=-=pontos setados. acende um pixels no meio da tela =-=-=-/
-struct Pixel pixel = {250,250};
+struct Pixel pixel; //= {250,250};
 
 
 //
@@ -35,7 +35,11 @@ struct Pixel pixel = {250,250};
 // Definição da função que chamará as funções implementadas pelo aluno
 void MyGlDraw(void) {
 
-putPixel(pixel, rgba);
+
+printPixels();
+
+/* pixel da cor verde*/
+
 
 
  }
@@ -63,6 +67,42 @@ int pos(int x, int y){
 
     fb_ptr[pos(pixel.x, pixel.y)+3] = rgba.alpha;
 
-  } 
+      
+  }
+
+ 
+
+}
+
+
+void printPixels(){
+
+/* pixel da cor vermelha */
+pixel.x = 250;
+pixel.y = 250;
+rgba.red = 255;
+rgba.green = 0;
+rgba.blue = 0;
+rgba.alpha = 255; 
+putPixel(pixel, rgba);
+
+/* pixel da cor verde*/
+pixel.x = 250;
+pixel.y = 480;
+rgba.red = 0;
+rgba.green = 255;
+rgba.blue = 0;
+rgba.alpha = 255; 
+putPixel(pixel, rgba);
+
+/*píxel da cor azul*/
+pixel.x = 300;
+pixel.y = 120;
+rgba.red = 0;
+rgba.green = 0;
+rgba.blue = 255;
+rgba.alpha = 255; 
+putPixel(pixel, rgba);
+
 
 }
