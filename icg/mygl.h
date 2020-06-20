@@ -8,7 +8,8 @@
 
 void MyGlDraw(void);
 void putPixel(pixel, rgba);
-//void DrawLine();
+
+void Drawline();
 //
 // >>> Declare aqui as funções que você implementar <<<
 //
