@@ -12,7 +12,7 @@ struct RGBA
     int red;
     int green;
     int blue;
-    int alpha
+    int alpha;
     
 };
 
@@ -38,6 +38,7 @@ void MyGlDraw(void) {
 
 printPixels();
 
+Drawline();
 /* pixel da cor verde*/
 
 
@@ -60,11 +61,8 @@ int pos(int x, int y){
 
 
     fb_ptr[pos(pixel.x, pixel.y)+0] = rgba.red;
-
     fb_ptr[pos(pixel.x, pixel.y)+1] = rgba.green;
-
     fb_ptr[pos(pixel.x, pixel.y)+2] = rgba.blue;
-
     fb_ptr[pos(pixel.x, pixel.y)+3] = rgba.alpha;
 
       
@@ -78,8 +76,8 @@ int pos(int x, int y){
 void printPixels(){
 
 /* pixel da cor vermelha */
-pixel.x = 250;
-pixel.y = 250;
+pixel.x = 050;
+pixel.y = 184;
 rgba.red = 255;
 rgba.green = 0;
 rgba.blue = 0;
@@ -87,7 +85,7 @@ rgba.alpha = 255;
 putPixel(pixel, rgba);
 
 /* pixel da cor verde*/
-pixel.x = 250;
+pixel.x = 165;
 pixel.y = 480;
 rgba.red = 0;
 rgba.green = 255;
@@ -104,5 +102,59 @@ rgba.blue = 255;
 rgba.alpha = 255; 
 putPixel(pixel, rgba);
 
+}
 
+void Drawline(){
+//desenhamos 3 linhas
+for(int i = 0; i <= 250;i++){
+  /*desenha uma linha vermelha na diagonal de cima para baixo
+  E na metade muda para verde*/
+    pixel.x = i;
+    pixel.y = i; //como não há parametro para o coeficiente angular a linha terá 45°
+
+    rgba.red = 255;
+    rgba.green = 0;
+    rgba.blue = 0;
+    rgba.alpha = 255;
+
+    if(i >= 125){      //muda para verde
+      rgba.red = 0;
+      rgba.green = 0;
+      rgba.blue = 255;
+      rgba.alpha = 255;
+
+    }
+
+      putPixel(pixel, rgba);
+
+      
+}
+for(int j = 0;j <= 512; j++){
+  pixel.x = j;
+  pixel.y = 250;
+
+   rgba.red = 0;
+   rgba.green = 255;
+   rgba.blue = 0;
+   rgba.alpha = 255;
+
+   putPixel(pixel, rgba);
+  
+  
+}
+
+for(int i=0, j=250; i<250;i++,j--){
+  
+  
+    pixel.x = j;
+    pixel.y = i;
+
+    rgba.red = 200;
+    rgba.green = 224;
+    rgba.blue = 18;
+    rgba.alpha = 255;
+ 
+    putPixel(pixel, rgba);
+    }
+   
 }
