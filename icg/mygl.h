@@ -7,9 +7,8 @@
 // Declaração da função que chamará as funções implementadas pelo aluno
 
 void MyGlDraw(void);
-void putPixel(pixel, rgba);
+void putPixel(pixel,rgba);
 
-void Drawline();
 //
 // >>> Declare aqui as funções que você implementar <<<
 //
