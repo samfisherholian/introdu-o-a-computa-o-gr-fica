@@ -99,8 +99,8 @@ void printPixels()
     putPixel(pixel, rgba);
 
     //Afim de formar um desenho podemos colocar pixels onde quisermos
-    for(int px = 0;px <= 512;px=px+8){
-      for(int py = 452;py <= 512; py = py+4){
+    for(int px = 0;px <= 512;px+=+8){
+      for(int py = 452;py <= 512; py +=4){
         if (px == 512){
         px == 0;
         }
@@ -131,7 +131,7 @@ void printPixels()
    
 
 //funcao de desenhar uma linha
-void drawline(Pixel p1, Pixel p2){
+void drawline(Pixel p1, Pixel p2, struct RGBA rgba){
     Pixel A = p1, B = p2;
     int dX = B.x - A.x;  //delta X = x2 - x(incicial);
     int dY = B.y - A.y;  //delta Y = y2 - y(inicial);
@@ -206,7 +206,7 @@ void printLines(){
   rgba.green = 0;
   rgba.blue = 0;
   rgba.alpha = 255;
-  drawline(p1,p2);
+  drawline(p1,p2,rgba);
   //desenha uma linha verde
   p1.x = 425;
   p1.y = 375;
@@ -221,7 +221,7 @@ void printLines(){
   rgba.green = 255;
   rgba.blue = 0;
   rgba.alpha = 255;
-  drawline(p1,p2);
+  drawline(p1,p2,rgba);
 
   //desenha uma linha azul
   p1.x = 200;
@@ -237,7 +237,7 @@ void printLines(){
   rgba.green = 0;
   rgba.blue = 255;
   rgba.alpha = 255;
-  drawline(p1,p2);
+  drawline(p1,p2,rgba);
   
   
   //desenha uma linha rosa
@@ -254,7 +254,7 @@ void printLines(){
   rgba.green = 126;
   rgba.blue = 211;
   rgba.alpha = 255;
-  drawline(p1,p2);
+  drawline(p1,p2,rgba);
 //desenha uma linha colorida frenética :D
   
   p1.x = 300;
@@ -270,7 +270,7 @@ void printLines(){
   rgba.green = rand() % 255;
   rgba.blue = rand() % 255;
   rgba.alpha = 255;
-  drawline(p1,p2);
+  drawline(p1,p2,rgba);
 
   
 //desenhar uma linha representando o chão do egito
@@ -287,15 +287,15 @@ void printLines(){
   rgba.green = 108;
   rgba.blue = 40;
   rgba.alpha = 255;
-  drawline(p1,p2);
+  drawline(p1,p2,rgba);
   
   
 }      
 void drawTriagle(Pixel p1, Pixel p2, Pixel p3)
 {
-  drawline(p1,p2);
-  drawline(p2,p3);
-  drawline(p1,p3);
+  drawline(p1,p2,rgba);
+  drawline(p2,p3,rgba);
+  drawline(p1,p3,rgba);
 } 
 
 void printTriagle(){
@@ -354,5 +354,4 @@ void printTriagle(){
 
   drawTriagle(p1,p2,p3);
   
-}
-    
+}    
