@@ -258,7 +258,6 @@ void printTriagle(){
   drawTriagle(p1,p2,p3);
 
   //desenha um triangulo verde dancante
-  for(int i,j,h; i  )
   p1.x = 250;
   p1.y = 100;
   rgba.red = 0;
@@ -283,4 +282,3 @@ void printTriagle(){
 
 
 }
-    
