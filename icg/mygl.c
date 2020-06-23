@@ -22,7 +22,7 @@ typedef struct
     int x;
     int y;
 }Pixel;
-Pixel pixel,p1,p2;
+Pixel pixel,p1,p2,p3;
 //
 // >>> Defina aqui as funções que você implementar <<< 
 //
@@ -31,7 +31,7 @@ void MyGlDraw(void) {
 
 printPixels();
 printLines();
-//printTriagle();
+printTriagle();
 }
 
 int pos(int x, int y){
@@ -49,16 +49,21 @@ int pos(int x, int y){
     fb_ptr[pos(pixel.x, pixel.y)+1] = rgba.green;
     fb_ptr[pos(pixel.x, pixel.y)+2] = rgba.blue;
     fb_ptr[pos(pixel.x, pixel.y)+3] = rgba.alpha;
-    //cores para os pixels do ponto 1 da reta
+    //cores para os pixels do ponto 1 de uma reta
     fb_ptr[pos(p1.x, p1.y)+0] = rgba.red;
     fb_ptr[pos(p1.x, p1.y)+1] = rgba.green;
     fb_ptr[pos(p1.x, p1.y)+2] = rgba.blue;
     fb_ptr[pos(p1.x, p1.y)+3] = rgba.alpha;
-    //cores para os pixels do ponto 2 da reta
+    //cores para os pixels do ponto 2 de uma reta
     fb_ptr[pos(p2.x, p2.y)+0] = rgba.red;
     fb_ptr[pos(p2.x, p2.y)+1] = rgba.green;
     fb_ptr[pos(p2.x, p2.y)+2] = rgba.blue;
     fb_ptr[pos(p2.x, p2.y)+3] = rgba.alpha;
+    //cores para os pixels do ponto 3 de uma reta
+    fb_ptr[pos(p3.x, p3.y)+0] = rgba.red;
+    fb_ptr[pos(p3.x, p3.y)+1] = rgba.green;
+    fb_ptr[pos(p3.x, p3.y)+2] = rgba.blue;
+    fb_ptr[pos(p3.x, p3.y)+3] = rgba.alpha;
  }
 }
 //Funcao de acender pixels na tela com uma determinada cor
@@ -220,4 +225,62 @@ void printLines(){
   drawline(p1,p2);
   
   
+}      
+void drawTriagle(Pixel p1, Pixel p2, Pixel p3)
+{
+  drawline(p1,p2);
+  drawline(p2,p3);
+  drawline(p1,p3);
+}  
+void printTriagle(){
+  //desenha um triangulo piscante
+  p1.x = 250;
+  p1.y = 450;
+  rgba.red = rand() % 255;
+  rgba.green = rand() % 255;
+  rgba.blue = rand() % 255;
+  rgba.alpha = 255;
+
+  p2.x = 300;
+  p2.y = 350;
+  rgba.red = rand() % 255;
+  rgba.green = rand() % 255;
+  rgba.blue = rand() % 255;
+  rgba.alpha = 255;
+
+  p3.x = 350;
+  p3.y = 450;
+  rgba.red = rand() % 255;
+  rgba.green = rand() % 255;
+  rgba.blue = rand() % 255;
+  rgba.alpha = 255;
+
+  drawTriagle(p1,p2,p3);
+
+  //desenha um triangulo verde dancante
+  for(int i,j,h; i  )
+  p1.x = 250;
+  p1.y = 100;
+  rgba.red = 0;
+  rgba.green = 255;
+  rgba.blue = 0;
+  rgba.alpha = 255;
+
+  p2.x = 300;
+  p2.y = 50;
+  rgba.red = 0;
+  rgba.green = 255;
+  rgba.blue = 0;
+  rgba.alpha = 255;
+
+  p3.x = 350;
+  p3.y = 100;
+  rgba.red = 0;
+  rgba.green = 255;
+  rgba.blue = 0;
+  rgba.alpha = 255;
+  drawTriagle(p1,p2,p3);
+
+
 }
+    
