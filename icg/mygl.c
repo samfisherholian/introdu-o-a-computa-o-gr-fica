@@ -268,21 +268,26 @@ void printLines(){
 
   
 //desenhar uma linha representando o chão do egito
-  p11.x = 0;
-  p11.y = 452;
-  p12.x = 512;
-  p12.y = 452;
+p1.x = 250;
+  p1.y = 450;
+  p2.x = 300;
+  p2.y = 350;
+  p3.x = 350;
+  p3.y = 450;
   
-  cor1.red = 204;
-  cor1.green = 108;
-  cor1.blue = 40;
+  cor1.red = 255;
+  cor1.green = 0;
+  cor1.blue = 0;
   cor1.alpha = 255;
-
-  cor2.red = 204;
-  cor2.green = 108;
-  cor2.blue = 40;
+  
+  cor2.red = 0;
+  cor2.green = 0;
+  cor2.blue = 255;
   cor2.alpha = 255;
-  drawline(p11,p12,cor1,cor2);
+
+  
+
+  drawTriagle(p1,p2,p3);
 }      
 void drawTriagle(Pixel A, Pixel B, Pixel C)
 {
