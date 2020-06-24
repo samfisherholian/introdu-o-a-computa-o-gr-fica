@@ -181,12 +181,11 @@ void drawline(Pixel a, Pixel b, RGBA cor1, RGBA cor2){
 }
 void printLines(){
   
-  
-  //desenha uma linha vermelha
-  p1.x = 0;
-  p1.y = 0;
-  p2.x = 250;
-  p2.y = 250;
+//Linha com cores interpoladas  
+  p1.x = 250;
+  p1.y = 400;
+  p2.x = 50;
+  p2.y = 350;
   
   cor1.red = 255;
   cor1.green = 0;
@@ -250,10 +249,10 @@ void printLines(){
   drawline(p7,p8,cor1,cor2);
 //desenha uma linha colorida frenética :D
   
- /* p9.x = 300;
-  p9.y = 190;
-  p10.x = 300;
-  p10.y = 330;
+  p9.x = 250;
+  p9.y = 30;
+  p10.x = 200;
+  p10.y = 40;
   
   cor1.red = rand() % 255;
   cor1.green = rand() % 255;
@@ -264,10 +263,44 @@ void printLines(){
   cor2.green = rand() % 255;
   cor2.blue = rand() % 255;
   cor2.alpha = 255;
-  drawline(p9,p10,cor1,cor2);*/
+  drawline(p9,p10,cor1,cor2);
+  //desenha uma linha colorida frenética :D
+  
+  p9.x = 250;
+  p9.y = 40;
+  p10.x = 200;
+  p10.y = 30;
+  
+  cor1.red = rand() % 255;
+  cor1.green = rand() % 255;
+  cor1.blue = rand() % 255;
+  cor1.alpha = 255;
+
+  cor2.red = rand() % 255;
+  cor2.green = rand() % 255;
+  cor2.blue = rand() % 255;
+  cor2.alpha = 255;
+  drawline(p9,p10,cor1,cor2);
+  //desenha uma linha colorida frenética :D
+  
+  p9.x = 300;
+  p9.y = 330;
+  p10.x = 225;
+  p10.y = 35;
+  
+  cor1.red = rand() % 255;
+  cor1.green = rand() % 255;
+  cor1.blue = rand() % 255;
+  cor1.alpha = 255;
+
+  cor2.red = rand() % 255;
+  cor2.green = rand() % 255;
+  cor2.blue = rand() % 255;
+  cor2.alpha = 255;
+  drawline(p9,p10,cor1,cor2);
 
   
-//desenhar uma linha representando o chão do egito
+//desenhar uma linha representando o chão
   p11.x = 0;
   p11.y = 452;
   p12.x = 512;
@@ -278,9 +311,9 @@ void printLines(){
   cor1.blue = 40;
   cor1.alpha = 255;
 
-  cor2.red = 204;
-  cor2.green = 108;
-  cor2.blue = 40;
+  cor2.red = 153;
+  cor2.green = 51;
+  cor2.blue = 153;
   cor2.alpha = 255;
   drawline(p11,p12,cor1,cor2);
 }      
@@ -292,7 +325,7 @@ void drawTriagle(Pixel A, Pixel B, Pixel C)
 } 
 
 void printTriagle(){
-  //desenha um triangulo piscante
+ 
   p1.x = 250;
   p1.y = 450;
   p2.x = 300;
@@ -301,19 +334,19 @@ void printTriagle(){
   p3.y = 450;
   
   cor1.red = 255;
-  cor1.green = 255;
+  cor1.green = 0;
   cor1.blue = 0;
   cor1.alpha = 255;
   
-  cor1.red = 255;
-  cor1.green = 255;
-  cor1.blue = 0;
-  cor1.alpha = 255;
+  cor2.red = 0;
+  cor2.green = 0;
+  cor2.blue = 255;
+  cor2.alpha = 255;
 
   
 
   drawTriagle(p1,p2,p3);
-  //desenha um triangulo com animação randomica de todos os pontos
+  //desenha um triangulo com animação randomica e cores ramdomicas de todos os pontos
   int p1x,p1y,p2x,p2y,p3x,p3y;
   p1x = 275 +(rand() % 10);
   p1y = 430 -(rand()% 10);
@@ -334,10 +367,10 @@ void printTriagle(){
   cor1.blue = rand() % 255;
   cor1.alpha = rand() % 255;
   
-  cor2.red = 0;
-  cor2.green = 5;
-  cor2.blue = 255;
-  cor2.alpha = 255;
+  cor2.red = rand() % 255;
+  cor2.green = rand() % 255;
+  cor2.blue = rand() % 255;
+  cor2.alpha = rand() % 255;
   drawTriagle(p4,p5,p6);
 
 }
