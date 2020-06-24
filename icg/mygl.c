@@ -7,7 +7,7 @@
 #include "mygl.h"
 
 // Um pixel é composto por 4 bytes
-struct RGBA
+typedef struct
 {
     int red;
     int green;
@@ -15,7 +15,8 @@ struct RGBA
     int alpha;
  
 }RGBA;
-struct RGBA rgba;// = {255, 0,0, 255};
+
+RGBA rgba1,rgba2, rgba;
 
 typedef struct
 {
@@ -23,15 +24,21 @@ typedef struct
     int y;
 }Pixel;
 Pixel pixel,p1,p2,p3;
+
+double inter1;
+double inter2;
+double inter3;
+double inter4;
+
 //
 // >>> Defina aqui as funções que você implementar <<< 
 //
 // Definição da função que chamará as funções implementadas pelo aluno
 void MyGlDraw(void) {
 
-printPixels();
+//printPixels();
 printLines();
-printTriagle();
+//printTriagle();
 }
 
 int pos(int x, int y){
@@ -41,7 +48,7 @@ int pos(int x, int y){
     return position;          
   }
 
-  void putPixel(Pixel pixel, struct RGBA rgba){
+  void putPixel(Pixel pixel, RGBA rgba){
 //teste para que não sejam pintados pixels indevidos na tela, limitando o desenho a apenas a area //disponível
  if((pixel.x>=0 && pixel.x<IMAGE_HEIGHT) && (pixel.y>=0 && pixel.y<IMAGE_WIDTH)){
     //cores para os pixels
@@ -70,8 +77,8 @@ int pos(int x, int y){
 //Abaixo esta a funcao de acender pixels na tela com uma determinada
 // cor num lugar determinado
 void printPixels()
-  {
-    /* pixel da cor vermelha na posição coluna 1 e linha 100*/
+  {/*
+    // pixel da cor vermelha na posição coluna 1 e linha 100
     pixel.x = 1;
     pixel.y = 100;
     rgba.red = 255;
@@ -80,7 +87,7 @@ void printPixels()
     rgba.alpha = 255; 
     putPixel(pixel, rgba); //chamada da funcao void putpixel
 
-    /* pixel da cor verde na coluna 300 e linha 10*/
+    // pixel da cor verde na coluna 300 e linha 10
     pixel.x = 300;
     pixel.y = 10;
     rgba.red = 0;
@@ -89,7 +96,7 @@ void printPixels()
     rgba.alpha = 255; 
     putPixel(pixel, rgba);
 
-    /*píxel da cor azul na coluna 250 e na linha 150*/
+    //píxel da cor azul na coluna 250 e na linha 150
     pixel.x = 250;
     pixel.y = 150;
     rgba.red = 0;
@@ -127,11 +134,12 @@ void printPixels()
     putPixel(pixel, rgba);
       }
     }
+    */
   }
    
 
 //funcao de desenhar uma linha
-void drawline(Pixel p1, Pixel p2, struct RGBA rgba){
+void drawline(Pixel p1, Pixel p2, RGBA cor1, RGBA cor2){
     Pixel A = p1, B = p2;
     int dX = B.x - A.x;  //delta X = x2 - x(incicial);
     int dY = B.y - A.y;  //delta Y = y2 - y(inicial);
@@ -172,42 +180,64 @@ void drawline(Pixel p1, Pixel p2, struct RGBA rgba){
         incrementoX1 = 0;
     }
     numerador = eixoMaior/2;
+
+   inter1 = (abs(cor2.red) - abs(cor1.red)) / abs(dX);
+   inter2 = (abs(cor2.blue) - abs(cor1.blue)) / abs(dX);
+   inter3 = (abs(cor2.green) - abs(cor1.green)) / abs(dX);
+   inter4 = (abs(cor2.alpha) - abs(cor1.alpha)) / abs(dX);
+
+  
     for (int i = 0; i <= eixoMaior; i++){
-        putPixel(A, rgba);
-        numerador += eixoMenor;
+
+        putPixel(A, cor1);
+
+      cor1.red += inter1;
+      cor1.blue += inter2;
+      cor1.green += inter3;
+      cor1.alpha += inter4;
+
+      
+
+      numerador += eixoMenor;
 
         if (numerador > eixoMaior){
             numerador -= eixoMaior;
             A.x += incrementoX0;
             A.y += incrementoY0;
+    
 
         }else {
 
             A.x += incrementoX1;
             A.y += incrementoY1;
+   
          }
     } 
+
+      
 
 }
 
 void printLines(){
 
   //desenha uma linha vermelha
-  p1.x = 175;
-  p1.y = 375;
-  rgba.red = 255;
-  rgba.green = 0;
-  rgba.blue = 0;
-  rgba.alpha = 255;
+  p1.x = 0;
+  p1.y = 0;
+  rgba1.red = 255;
+  rgba1.green = 0;
+  rgba1.blue = 0;
+  rgba1.alpha = 255;
 
-  p2.x = 250;
-  p2.y = 425;
-  rgba.red = 255;
-  rgba.green = 0;
-  rgba.blue = 0;
-  rgba.alpha = 255;
-  drawline(p1,p2,rgba);
+  p2.x = 511;
+  p2.y = 511;
+  rgba2.red = 0;
+  rgba2.green = 255;
+  rgba2.blue = 0;
+  rgba2.alpha = 255;
+  drawline(p1,p2,rgba1,rgba2);
   //desenha uma linha verde
+}
+  /*
   p1.x = 425;
   p1.y = 375;
   rgba.red = 0;
@@ -218,10 +248,10 @@ void printLines(){
   p2.x = 350;
   p2.y = 425;
   rgba.red = 0;
-  rgba.green = 255;
-  rgba.blue = 0;
+  rgba.green = 0;
+  rgba.blue = 255;
   rgba.alpha = 255;
-  drawline(p1,p2,rgba);
+  drawline(p1,p2,rgba1,rgba2);
 
   //desenha uma linha azul
   p1.x = 200;
@@ -234,43 +264,43 @@ void printLines(){
   p2.x = 275;
   p2.y = 375;
   rgba.red = 0;
-  rgba.green = 0;
-  rgba.blue = 255;
+  rgba.green = 255;
+  rgba.blue = 0;
   rgba.alpha = 255;
-  drawline(p1,p2,rgba);
+  drawline(p1,p2,rgba1,rgba2);
   
   
   //desenha uma linha rosa
   p1.x = 325;
   p1.y = 375;
-  rgba.red = 242;
+  rgba.red = 255;
   rgba.green = 126;
   rgba.blue = 211;
   rgba.alpha = 255;
 
   p2.x = 425;
   p2.y = 315;
-  rgba.red = 242;
-  rgba.green = 126;
-  rgba.blue = 211;
+  rgba.red = 255;
+  rgba.green = 0;
+  rgba.blue = 0;
   rgba.alpha = 255;
-  drawline(p1,p2,rgba);
+  drawline(p1,p2,rgba1,rgba2);
 //desenha uma linha colorida frenética :D
   
   p1.x = 300;
   p1.y = 190;
-  rgba.red = rand() % 255;
-  rgba.green = rand() % 255;
-  rgba.blue = rand() % 255;
+  rgba.red = 255;
+  rgba.green = 255;
+  rgba.blue = 255;
   rgba.alpha = 255;
 
   p2.x = 300;
   p2.y = 330;
-  rgba.red = rand() % 255;
-  rgba.green = rand() % 255;
-  rgba.blue = rand() % 255;
+  rgba.red = 255;
+  rgba.green = 255;
+  rgba.blue = 255;
   rgba.alpha = 255;
-  drawline(p1,p2,rgba);
+  drawline(p1,p2,rgba1,rgba2);
 
   
 //desenhar uma linha representando o chão do egito
@@ -287,38 +317,38 @@ void printLines(){
   rgba.green = 108;
   rgba.blue = 40;
   rgba.alpha = 255;
-  drawline(p1,p2,rgba);
+  drawline(p1,p2,rgba,rgba2);
   
   
 }      
 void drawTriagle(Pixel p1, Pixel p2, Pixel p3)
 {
-  drawline(p1,p2,rgba);
-  drawline(p2,p3,rgba);
-  drawline(p1,p3,rgba);
+  drawline(p1,p2,rgba1,rgba2);
+  drawline(p2,p3,rgba1,rgba2);
+  drawline(p1,p3,rgba1,rgba2);
 } 
 
 void printTriagle(){
   //desenha um triangulo piscante
   p1.x = 250;
   p1.y = 450;
-  rgba.red = rand() % 255;
-  rgba.green = rand() % 255;
-  rgba.blue = rand() % 255;
+  rgba.red = 255;
+  rgba.green = 255;
+  rgba.blue = 255;
   rgba.alpha = 255;
 
   p2.x = 300;
   p2.y = 350;
-  rgba.red = rand() % 255;
-  rgba.green = rand() % 255;
-  rgba.blue = rand() % 255;
+  rgba.red = 255;
+  rgba.green = 255;
+  rgba.blue = 255;
   rgba.alpha = 255;
 
   p3.x = 350;
   p3.y = 450;
-  rgba.red = rand() % 255;
-  rgba.green = rand() % 255;
-  rgba.blue = rand() % 255;
+  rgba.red = 255;
+  rgba.green = 255;
+  rgba.blue = 255;
   rgba.alpha = 255;
 
   drawTriagle(p1,p2,p3);
@@ -355,3 +385,4 @@ void printTriagle(){
   drawTriagle(p1,p2,p3);
   
 }    
+*/
