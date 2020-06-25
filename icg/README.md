@@ -10,4 +10,6 @@ O objetivo deste trabalho implementar algoritmos para a rasterização de pontos
 Para este trabalho foi disponiblizado o framework que simula uma tela de 512x512 pixels, pois os sitemas operacionais atualmente não permitem acesso direto a memoria do computador.
 
 ## "put pixel"
-Put pixel é o nome da função que demos para acender os pixels na tela do framwork. Cada pixel poussi 4 bytes cada bytes armazena as informações das 4 cores (RED, GREEN, BLUE, ALPHA), cada cor possui uma variação de 0 a 255 a cor alpha representa a transparencia da cor e na escolha de cada ponto obrigatoriamente escolhemos a cor que vai ser representada. Cada pixel possui 2 cordenadas e ela se move de 4 em 4 bytes 
+![fotopupixel](https://github.com/samfisherholian/introducao-a-computacao-grafica/blob/master/icg/foto1.jpeg)
+
+Put pixel é o nome da função que demos para acender os pixels na tela do framwork. Cada pixel poussi 4 bytes cada bytes armazena as informações das 4 cores (RED, GREEN, BLUE, ALPHA), cada cor possui uma variação de 0 a 255 a cor alpha representa a transparencia da cor e na escolha de cada ponto obrigatoriamente escolhemos a cor que vai ser representada. Cada pixel possui 2 cordenadas e ela se move de 4 em 4 bytes. 
