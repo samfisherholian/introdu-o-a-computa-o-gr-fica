@@ -12,8 +12,8 @@ typedef struct
     int x;
     int y;
 }Pixel;
-
-Pixel p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12;
+//abaixo estao os pontos usados nesta tela
+Pixel p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14;
 
 typedef struct
 {
@@ -138,14 +138,14 @@ void drawline(Pixel a, Pixel b, RGBA cor1, RGBA cor2){
     int dX = B.x - A.x;  //delta X = x2 - x(incicial); 
     int dY = B.y - A.y;  //delta Y = y2 - y(inicial);
     int M, m;   // M = eixo maior e m = eixo menor
-    int N; // numero
+    int N; // numero que fica em cima da fracao
 
-    //testes para analisar se os eixos estão crescendo ou decrescendo de acordo com o delta
-    if (dX > 0){            
+    //Analise se o delta é positivo ou negativo ou zero
+    if (dX > 0){//delta cresce            
         x1++;
-        x2++;
+        x2++; 
     }
-    if (dX < 0){     
+    if (dX < 0){//delta decresce     
         x1--;
         x2--;
     }
@@ -173,7 +173,7 @@ void drawline(Pixel a, Pixel b, RGBA cor1, RGBA cor2){
         x2 = 0;
     }
     N = M/2;
-
+    //formula da mudanca de cor
     interpolacao1 = ((cor2.red) - (cor1.red)) / dX;
     interpolacao2 = ((cor2.blue) - (cor1.blue)) / dX;
     interpolacao3 = ((cor2.green) - (cor1.green)) / dX;
@@ -181,6 +181,7 @@ void drawline(Pixel a, Pixel b, RGBA cor1, RGBA cor2){
 
     for (int i = 0; i <= M; i++){
         putPixel(A,cor1);
+        //pega a cor interpolada e coloca no pixel
         cor1.red += interpolacao1;
         cor1.blue += interpolacao2;
         cor1.green += interpolacao3;
@@ -205,8 +206,8 @@ void drawline(Pixel a, Pixel b, RGBA cor1, RGBA cor2){
 
 }
 void printLines(){
-  
-//Linha com cores interpoladas  
+//Linha com cores interpoladas
+//cor 1 diferente de cor2  
   p1.x = 250;
   p1.y = 400;
   p2.x = 50;
@@ -223,7 +224,7 @@ void printLines(){
   cor2.alpha = 255;
   drawline(p1,p2,cor1,cor2);
 
-  //desenha uma linha verde
+  //desenha uma linha verde, com cor1 e cor2 iguais
   p3.x = 425;
   p3.y = 375;
   cor1.red = 0;
@@ -290,7 +291,7 @@ void printLines(){
   cor2.alpha = 255;
   drawline(p9,p10,cor1,cor2);
 
-  //desenha uma linha colorida frenética :D
+  //desenha outra linha colorida frenética :D
   p9.x = 250;
   p9.y = 40;
   p10.x = 200;
@@ -307,7 +308,7 @@ void printLines(){
   cor2.alpha = 255;
   drawline(p9,p10,cor1,cor2);
 
-  //desenha uma linha colorida frenética :D
+  //desenha mais uma linha colorida frenética :D
   p9.x = 300;
   p9.y = 330;
   p10.x = 225;
@@ -324,39 +325,45 @@ void printLines(){
   cor2.alpha = 255;
   drawline(p9,p10,cor1,cor2);
 
-//desenhar uma linha representando o chão do egito
-  p1.x = 250;
-  p1.y = 450;
-  p2.x = 300;
-  p2.y = 350;
-  p3.x = 350;
-  p3.y = 450;
-
 //desenhar uma linha representando o chão
   p11.x = 0;
   p11.y = 452;
-  p12.x = 512;
+  p12.x = 250;
   p12.y = 452;
   
   cor1.red = 255;
   cor1.green = 0;
   cor1.blue = 0;
   cor1.alpha = 255;
+
+  cor2.red = 255;
+  cor2.green = 255;
+  cor2.blue = 0;
+  cor2.alpha = 255;
+
+  drawline(p11,p12,cor1,cor2);
+  p13.x = 251;
+  p13.y = 452;
+  p14.x = 501;
+  p14.y = 452;
   
+  cor1.red = 255;
+  cor1.green = 255;
+  cor1.blue = 0;
+  cor1.alpha = 255;
+
   cor2.red = 0;
   cor2.green = 0;
   cor2.blue = 255;
-
-  cor2.red = 153;
-  cor2.green = 51;
-  cor2.blue = 153;
   cor2.alpha = 255;
 
-  drawTriagle(p1,p2,p3);
+  drawline(p13,p14,cor1,cor2);
 
+drawline(p11,p12,cor1,cor2);
 }      
 void drawTriagle(Pixel A, Pixel B, Pixel C)
 {
+  //chama a funcao drawline e liga seus extremos
   drawline(A,B,cor1,cor2);
   drawline(B,C,cor1,cor2);
   drawline(A,C,cor1,cor2);
