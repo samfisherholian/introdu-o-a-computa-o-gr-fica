@@ -52,8 +52,24 @@ A função Drawtriangle recebe atribuição de três pontos e suas coordenadas (
 
 Nesta função chamamos a função de desenhar linhas "Drawline" três vezes e dentro de "Drawline" fazemos uma combinação dos pontos A,B,C onde o 'A' se liga ao 'B', 'B' ao 'C' e 'C' ao 'A'.
 
-## printLines
+## printLines.
 
+  Nesta função chamamos o ponto inicial e o ponto final da linha setamos suas coordenadas e para cada ponto atribuimos as suas cores
+  
+  Foto printlines
+  
+   caso queiramos não interpolar a cor basta apenas ou repetir a "cor1" igual a "cor2" ou na chamada de drawline chamarmos uma das cores. podemos até brincar com as cores e a linguagem c como na foto abaixo
    
-   
-   
+   Fotolinhacorrandomica
+
+Nesta chamada apenas atribuimos a função "rand() % " ilimitado de 0 a 255 irar mudar a cor freneticamente nos 4 bytes de cada ponto.
+
+ 
+## printTriangles.
+
+A ultima Função serve para chamar drawtrinagle com os três pontos e suas respecitivas coordenadas tomando-se cuidado para entender a lógica da ligação dos vertices de um triangulo comun abc como observado na figura, ha conhecidencias nas coordenadas dos pixels p1,p2,p3.
+
+fotoprinttriangles
+
+## conciderações finais.
+
