@@ -2,7 +2,7 @@
  * Autores: Tiago Silva da Costa.
  *          Marcus vinicius.
  * 
- *  tudo que estiver com o nome de 'p' neste codigo significa ponto
+ * 
  * **/
 #include "mygl.h"
 
@@ -12,9 +12,7 @@ typedef struct
     int x;
     int y;
 }Pixel;
-//abaixo estao os pontos usados nesta tela
-Pixel p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14;
-
+Pixel p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12;
 typedef struct
 {
     int red;
@@ -23,13 +21,11 @@ typedef struct
     int alpha;
  
 }RGBA;
-
 RGBA cor1,cor2, corpixel;
-
-float interpolacao1;
-float interpolacao2;
-float interpolacao3;
-float interpolacao4;
+int inter1;
+int inter2;
+int inter3;
+int inter4;
 //
 // >>> Defina aqui as funções que você implementar <<< 
 //
@@ -39,18 +35,15 @@ void MyGlDraw(void) {
 printPixels();
 printLines();
 printTriagle();
-
 }
 void putPixel(Pixel p, RGBA cor){
     if((p.x>=0 && p.x<IMAGE_HEIGHT) && (p.y>=0 && p.y<IMAGE_WIDTH)){
     //cores para os pixels
-      fb_ptr[p.x*4 +p.y*4*IMAGE_WIDTH+0] = cor.red;
-      fb_ptr[p.x*4 +p.y*4*IMAGE_WIDTH+1] = cor.green;
-      fb_ptr[p.x*4 +p.y*4*IMAGE_WIDTH+2] = cor.blue;
-      fb_ptr[p.x*4 +p.y*4*IMAGE_WIDTH+3] = cor.alpha;
-
+    fb_ptr[p.x*4 +p.y*4*IMAGE_WIDTH+0] = cor.red;
+    fb_ptr[p.x*4 +p.y*4*IMAGE_WIDTH+1] = cor.green;
+    fb_ptr[p.x*4 +p.y*4*IMAGE_WIDTH+2] = cor.blue;
+    fb_ptr[p.x*4 +p.y*4*IMAGE_WIDTH+3] = cor.alpha;
     }
-
 }
 //Abaixo esta a funcao de acender pixels na tela com uma determinada
 // cor num lugar determinado
@@ -85,15 +78,10 @@ void printPixels()
 
     //Afim de formar um desenho podemos colocar pixels onde quisermos
     for(int px = 0;px <= 512;px=px+8){
-
       for(int py = 452;py <= 512; py = py+4){
-
         if (px == 512){
-
         px == 0;
-
         }
-
     p4.x = px;
     p4.y = py;
     corpixel.red = 191;
@@ -101,18 +89,12 @@ void printPixels()
     corpixel.blue = 63;
     corpixel.alpha = 255; 
     putPixel(p4,corpixel);
-
+      }
     }
-
-  }
     for(int px = 5;px <= 512;px=px+8){
-
       for(int py = 455;py <= 512; py = py+4){
-
         if (px == 512){
-
         px == 5;
-
         }
     p5.x = px;
     p5.y = py;
@@ -121,31 +103,25 @@ void printPixels()
     corpixel.blue = 255;
     corpixel.alpha = 255; 
     putPixel(p5,corpixel);
-
       }
-
     }
-
   }
    
 
 //funcao de desenhar uma linha
 void drawline(Pixel a, Pixel b, RGBA cor1, RGBA cor2){
-  
     Pixel A = a, B = b;
-    
     int x1 = 0, y1 = 0, x2 = 0, y2 = 0; //incrementos
-    int dX = B.x - A.x;  //delta X = x2 - x(incicial); 
+    int dX = B.x - A.x;  //delta X = x2 - x(incicial);
     int dY = B.y - A.y;  //delta Y = y2 - y(inicial);
-    int M, m;   // M = eixo maior e m = eixo menor
-    int N; // numero que fica em cima da fracao
-
-    //Analise se o delta é positivo ou negativo ou zero
-    if (dX > 0){//delta cresce            
+    int M, m;   
+    int N;
+    //testes para analisar se os eixos estão crescendo ou decrescendo de acordo com o delta
+    if (dX > 0){            
         x1++;
-        x2++; 
+        x2++;
     }
-    if (dX < 0){//delta decresce     
+    if (dX < 0){     
         x1--;
         x2--;
     }
@@ -173,19 +149,18 @@ void drawline(Pixel a, Pixel b, RGBA cor1, RGBA cor2){
         x2 = 0;
     }
     N = M/2;
-    //formula da mudanca de cor
-    interpolacao1 = ((cor2.red) - (cor1.red)) / dX;
-    interpolacao2 = ((cor2.blue) - (cor1.blue)) / dX;
-    interpolacao3 = ((cor2.green) - (cor1.green)) / dX;
-    interpolacao4 = ((cor2.alpha) - (cor1.alpha)) / dX;
+    //formula da mudanca de cor e sua atribuicao a nomeclatura "inter X"
+    inter1 = ((cor2.red) - (cor1.red)) / dX;
+    inter2 = ((cor2.blue) - (cor1.blue)) / dX;
+    inter3 = ((cor2.green) - (cor1.green)) / dX;
+    inter4 = ((cor2.alpha) - (cor1.alpha)) / dX;
 
     for (int i = 0; i <= M; i++){
         putPixel(A,cor1);
-        //pega a cor interpolada e coloca no pixel
-        cor1.red += interpolacao1;
-        cor1.blue += interpolacao2;
-        cor1.green += interpolacao3;
-        cor1.alpha += interpolacao4;
+        cor1.red += inter1;
+        cor1.blue += inter2;
+        cor1.green += inter3;
+        cor1.alpha += inter4;
        
         N += m;
 
@@ -193,21 +168,17 @@ void drawline(Pixel a, Pixel b, RGBA cor1, RGBA cor2){
             N -= M;
             A.x += x1;
             A.y += y1;
-           //aqui tem a primeira mudança de cor do primeiro ponto   
-           //se o ponto p1 for menor que o p2
-        }else {
+          }else {
 
             A.x += x2;
             A.y += y2;
-           //aqui tem a primeira mudança de cor do primeiro ponto
-           //se o ponto p2 for menor que o p1  
-         }
+          }
     } 
 
 }
 void printLines(){
-//Linha com cores interpoladas
-//cor 1 diferente de cor2  
+  
+//Linha com cores interpoladas  
   p1.x = 250;
   p1.y = 400;
   p2.x = 50;
@@ -223,8 +194,7 @@ void printLines(){
   cor2.blue = 0;
   cor2.alpha = 255;
   drawline(p1,p2,cor1,cor2);
-
-  //desenha uma linha verde, com cor1 e cor2 iguais
+  //desenha uma linha verde
   p3.x = 425;
   p3.y = 375;
   cor1.red = 0;
@@ -256,7 +226,8 @@ void printLines(){
   cor2.blue = 255;
   cor2.alpha = 255;
   drawline(p5,p6,cor1,cor2);
-
+  
+  
   //desenha uma linha rosa
   p7.x = 325;
   p7.y = 375;
@@ -273,8 +244,8 @@ void printLines(){
   cor2.blue = 211;
   cor2.alpha = 255;
   drawline(p7,p8,cor1,cor2);
-
 //desenha uma linha colorida frenética :D
+  
   p9.x = 250;
   p9.y = 30;
   p10.x = 200;
@@ -290,8 +261,8 @@ void printLines(){
   cor2.blue = rand() % 255;
   cor2.alpha = 255;
   drawline(p9,p10,cor1,cor2);
-
-  //desenha outra linha colorida frenética :D
+  //desenha uma linha colorida frenética :D
+  
   p9.x = 250;
   p9.y = 40;
   p10.x = 200;
@@ -307,8 +278,8 @@ void printLines(){
   cor2.blue = rand() % 255;
   cor2.alpha = 255;
   drawline(p9,p10,cor1,cor2);
-
-  //desenha mais uma linha colorida frenética :D
+  //desenha uma linha colorida frenética :D
+  
   p9.x = 300;
   p9.y = 330;
   p10.x = 225;
@@ -325,45 +296,26 @@ void printLines(){
   cor2.alpha = 255;
   drawline(p9,p10,cor1,cor2);
 
+  
 //desenhar uma linha representando o chão
   p11.x = 0;
   p11.y = 452;
-  p12.x = 250;
+  p12.x = 512;
   p12.y = 452;
   
-  cor1.red = 255;
-  cor1.green = 0;
-  cor1.blue = 0;
+  cor1.red = 204;
+  cor1.green = 108;
+  cor1.blue = 40;
   cor1.alpha = 255;
 
-  cor2.red = 255;
-  cor2.green = 255;
-  cor2.blue = 0;
+  cor2.red = 153;
+  cor2.green = 51;
+  cor2.blue = 153;
   cor2.alpha = 255;
-
   drawline(p11,p12,cor1,cor2);
-  p13.x = 251;
-  p13.y = 452;
-  p14.x = 501;
-  p14.y = 452;
-  
-  cor1.red = 255;
-  cor1.green = 255;
-  cor1.blue = 0;
-  cor1.alpha = 255;
-
-  cor2.red = 0;
-  cor2.green = 0;
-  cor2.blue = 255;
-  cor2.alpha = 255;
-
-  drawline(p13,p14,cor1,cor2);
-
-drawline(p11,p12,cor1,cor2);
 }      
 void drawTriagle(Pixel A, Pixel B, Pixel C)
 {
-  //chama a funcao drawline e liga seus extremos
   drawline(A,B,cor1,cor2);
   drawline(B,C,cor1,cor2);
   drawline(A,C,cor1,cor2);
@@ -417,3 +369,5 @@ void printTriagle(){
   drawTriagle(p4,p5,p6);
 
 }
+
+
