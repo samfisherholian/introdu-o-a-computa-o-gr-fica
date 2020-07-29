@@ -20,7 +20,7 @@ FotoMatrizModel
 
   Neste exercício foi pedido para que alteramos os eixos x, y e z [1/3, 3/2, 1].
   
-  1[](https://github.com/samfisherholian/introducao-a-computacao-grafica/blob/master/photos/Fotomeu1.jpeg)
+  [](https://github.com/samfisherholian/introducao-a-computacao-grafica/blob/master/photos/Fotomeu1.jpeg)
   
   e obtemos o resultado
   
@@ -43,7 +43,7 @@ FotoMatrizModel
   Para o exercício 3 foi pedido que alterasse o valor da variavel 'd' em 1/2, como estamos lidando com a mão esquerda a matriz é transposta e o 'd' troca de lugar com o -1/d, no nosso código 'D' é igual 'd' 'E' é igual -1/D 
   
 
-  ![](https://github.com/samfisherholian/introducao-a-computacao-grafica/blob/master/photos/
+  ![](https://github.com/samfisherholian/introducao-a-computacao-grafica/blob/master/photos/Fotocodigoex3a.jpeg)
   
   e obtemos o resultado (D está setado como 0.5f).
   
