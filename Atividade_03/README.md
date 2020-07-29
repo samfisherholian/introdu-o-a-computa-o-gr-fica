@@ -14,7 +14,6 @@ Link do vídeo da atividade 03 -> https://www.youtube.com/watch?v=HBIT0VgORrw&fe
   
   Neste Trabalho foi estabelecido o universo de mão esquerda que é invertido em z para o exercício 1 (escala) basta a apenas modificar os valores em sx, sy e sz da matriz model 
 
-FotoMatrizModel
 
 ![](https://github.com/samfisherholian/introducao-a-computacao-grafica/blob/master/photos/matrizModel.jpeg)
 
